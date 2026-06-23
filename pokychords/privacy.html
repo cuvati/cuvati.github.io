@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PokyChords — Privacy Policy</title>
+  <!-- This is a standalone, host-anywhere copy of docs/PRIVACY.md (the canonical
+       source). If the policy text changes, update PRIVACY.md and regenerate this. -->
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      max-width: 720px; margin: 2.5rem auto; padding: 0 1.25rem;
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1a1a1a;
+    }
+    @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #9b8cff; } }
+    h1 { font-size: 1.7rem; margin-bottom: .25rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; }
+    h3 { font-size: 1.02rem; margin-top: 1.4rem; }
+    .meta { color: #777; font-size: .9rem; }
+    ul { padding-left: 1.2rem; }
+    code { background: rgba(127,127,127,.15); padding: .1em .35em; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>PokyChords — Privacy Policy</h1>
+  <p class="meta"><strong>Effective date:</strong> 2026-06-23 &middot; <strong>Last updated:</strong> 2026-06-23</p>
+
+  <p>PokyChords ("the app", "we", "us") is a local-first songbook app operated by
+  <strong>Remy Chu</strong>. This policy explains what data the app handles and what it
+  does not. We designed PokyChords to keep your data on your device.</p>
+
+  <h2>The short version</h2>
+  <ul>
+    <li><strong>Your songs stay on your device.</strong> There is no account, no login, and no
+      PokyChords server that stores your songs, lyrics, chords, or library.</li>
+    <li>The app connects to the internet in only three situations, all described below:
+      <strong>(1)</strong> importing a song from a web URL, <strong>(2)</strong> the optional
+      "Normalize with AI" action, and <strong>(3)</strong> an abuse-prevention rate limit tied to
+      the AI action.</li>
+    <li>We do <strong>not</strong> sell your data, show ads, track you across apps or websites, or
+      run analytics.</li>
+  </ul>
+
+  <h2>Data stored on your device</h2>
+  <p>Songs you import or create — including titles, artists, lyrics, chords, keys, capo, tags,
+  favorites, and transpose settings — are stored <strong>locally on your device only</strong>.
+  They are not transmitted to us or backed up to our servers. If you delete a song in the app or
+  uninstall the app, that data is removed from your device. We have no copy.</p>
+
+  <h2>When the app connects to the internet</h2>
+  <p>The rest of the app — opening, searching, editing, transposing, favoriting, and viewing songs —
+  works fully offline. The app contacts the network only here:</p>
+
+  <h3>1. Importing a song from a web URL</h3>
+  <p>When you share or paste a <strong>link</strong> to a supported chord-sheet website, the app
+  fetches that page <strong>directly from the third-party website</strong>, on your device, to read
+  the chords and lyrics. That request goes to the website you chose (not to PokyChords), and that
+  website receives it like any normal web request (including your device's IP address and request
+  headers). We do not control and are not responsible for those third-party websites; their own
+  privacy practices apply. PokyChords does not send the imported page or the resulting song to us.</p>
+
+  <h3>2. Optional "Normalize with AI"</h3>
+  <p>If an import can't be read automatically, the app saves it as an editable <strong>draft</strong>.
+  Only if <strong>you manually tap "Normalize with AI"</strong> on that draft does the app send the
+  <strong>chord/lyric text of that draft</strong> to our backend (a serverless function), which
+  forwards it to <strong>Google's Gemini API</strong> to clean up the formatting and return a tidy
+  song sheet.</p>
+  <ul>
+    <li>This happens <strong>only on your explicit tap</strong> — never automatically, and never
+      during normal use (capture, search, viewing, editing, or transposing).</li>
+    <li>The submitted text is processed <strong>transiently</strong> to produce the result. We do
+      <strong>not</strong> store your lyrics, chords, titles, artists, or the normalized output on
+      our servers, and we do <strong>not</strong> write them to our logs (we log only technical
+      measures such as text length and token counts).</li>
+    <li>The text is processed by Google as our service provider. Your use of this feature is also
+      subject to Google's applicable terms and privacy policy.</li>
+  </ul>
+
+  <h3>3. Abuse-prevention rate limit</h3>
+  <p>Because the AI feature has no login, we apply a simple per-source rate limit to prevent abuse
+  and control cost. When you use "Normalize with AI", our backend records, for that request only:</p>
+  <ul>
+    <li>a <strong>salted, one-way hash of your IP address</strong> (not your IP address itself, and
+      not reversible to it in normal use),</li>
+    <li>a time window, and</li>
+    <li>a request count.</li>
+  </ul>
+  <p>This record contains <strong>no song content</strong> and is <strong>not linked to any account
+  or identity</strong> (there is none). It exists solely to count recent requests per source and is
+  used only for rate-limiting and abuse prevention.</p>
+
+  <h2>What we do not do</h2>
+  <ul>
+    <li>No user accounts or logins.</li>
+    <li>No advertising and no ad networks.</li>
+    <li>No cross-app or cross-site tracking, and no advertising identifiers.</li>
+    <li>No analytics or usage telemetry.</li>
+    <li>No selling or renting of personal data.</li>
+    <li>No crash-reporting collection is active in this version.</li>
+  </ul>
+
+  <h2>Third-party services</h2>
+  <ul>
+    <li><strong>Supabase</strong> hosts the serverless function and the rate-limit record described
+      above (operational data only — no song content).</li>
+    <li><strong>Google Gemini API</strong> processes the text you submit <em>only</em> when you use
+      "Normalize with AI", to return a normalized song sheet.</li>
+  </ul>
+  <p>These providers process data on our behalf for the limited purposes above. We do not authorize
+  them to use your submitted text for their own purposes.</p>
+
+  <h2>Data retention</h2>
+  <ul>
+    <li><strong>On-device songs:</strong> kept until you delete them or uninstall the app.</li>
+    <li><strong>AI-submitted text:</strong> not retained by us after the request is processed.</li>
+    <li><strong>Rate-limit records:</strong> operational metadata only (hashed source + counters),
+      retained briefly for the rate-limiting window and periodically cleaned up.</li>
+  </ul>
+
+  <h2>Children's privacy</h2>
+  <p>PokyChords is not directed to children under 13 (or the equivalent minimum age in your region)
+  and does not knowingly collect personal information from them.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li>Everything except importing works offline; you can use the app without ever triggering a
+      network request.</li>
+    <li>You control whether "Normalize with AI" is ever used — it requires your tap.</li>
+    <li>You can delete any song in the app, and uninstalling removes all on-device data. Because we
+      hold no account and no copy of your library, there is no server-side account to delete.</li>
+  </ul>
+
+  <h2>Security</h2>
+  <p>We use industry-standard measures to protect the limited data described here (for example,
+  HTTPS for network requests and a salted hash for the rate-limit record). No method of transmission
+  or storage is completely secure, but we keep the data we touch deliberately minimal.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We may update this policy as the app evolves. We will revise the "Last updated" date above and,
+  for material changes, provide notice within the app or store listing as appropriate.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy or your privacy? Contact us at
+  <a href="mailto:churemy@gmail.com">churemy@gmail.com</a>.</p>
+</body>
+</html>
