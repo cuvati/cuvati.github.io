@@ -34,10 +34,14 @@
   <ul>
     <li><strong>Your songs stay on your device.</strong> There is no account, no login, and no
       PokyChords server that stores your songs, lyrics, chords, or library.</li>
-    <li>The app connects to the internet in only three situations, all described below:
-      <strong>(1)</strong> importing a song from a web URL, <strong>(2)</strong> the optional
-      "Normalize with AI" action, and <strong>(3)</strong> an abuse-prevention rate limit tied to
-      the AI action.</li>
+    <li>The app connects to the internet in only six situations, all described below:
+      <strong>(1)</strong> importing a song from a web URL, <strong>(2)</strong> browsing the web in
+      the in-app <strong>Find</strong> browser, <strong>(3)</strong> the optional
+      "Normalize with AI" / "Reformat with AI" actions, <strong>(4)</strong> the optional
+      "Suggest similar songs" action, <strong>(5)</strong> playing an attached YouTube video, and
+      <strong>(6)</strong> an abuse-prevention rate limit tied to the AI actions.</li>
+    <li><strong>The in-app browser can reach any website you navigate to.</strong> We do not
+      restrict it to chord-sheet sites, and we do not record where you go.</li>
     <li>We do <strong>not</strong> sell your data, show ads, track you across apps or websites, or
       run analytics.</li>
   </ul>
@@ -47,6 +51,10 @@
   favorites, and transpose settings — are stored <strong>locally on your device only</strong>.
   They are not transmitted to us or backed up to our servers. If you delete a song in the app or
   uninstall the app, that data is removed from your device. We have no copy.</p>
+  <p>You can export your whole songbook to a <strong>backup file</strong> yourself (Settings &rarr;
+  Back up songbook) and restore it later. That file is written by your device and handed to whichever
+  app you choose to save or send it with &mdash; it never passes through us. Where it then lives, and
+  who can read it, is up to you.</p>
 
   <h2>When the app connects to the internet</h2>
   <p>The rest of the app — opening, searching, editing, transposing, favoriting, and viewing songs —
@@ -60,12 +68,22 @@
   headers). We do not control and are not responsible for those third-party websites; their own
   privacy practices apply. PokyChords does not send the imported page or the resulting song to us.</p>
 
-  <h3>2. Optional "Normalize with AI"</h3>
-  <p>If an import can't be read automatically, the app saves it as an editable <strong>draft</strong>.
-  Only if <strong>you manually tap "Normalize with AI"</strong> on that draft does the app send the
-  <strong>chord/lyric text of that draft</strong> to our backend (a serverless function), which
-  forwards it to <strong>Google's Gemini API</strong> to clean up the formatting and return a tidy
-  song sheet.</p>
+  <h3>2. Finding songs on the web (the in-app browser)</h3>
+  <p><strong>Find</strong> opens a normal web search inside the app so you can see a page before
+  importing it. From there you can follow links like you would in any browser &mdash; so the app can
+  load <strong>any website you navigate to</strong>. Those pages load directly from the sites
+  themselves; PokyChords does not proxy, log, or receive them, and we do not record your browsing.
+  Each site you visit sees the request like any normal web request (including your device's IP
+  address and request headers), and its own privacy practices and cookies apply. Only the page you
+  explicitly choose to import is read for chords, and that reading happens on your device.</p>
+
+  <h3>3. Optional "Normalize with AI" / "Reformat with AI"</h3>
+  <p>AI formatting only ever runs when <strong>you tap a button</strong> — never automatically. Two
+  cases: if an import can't be read automatically, the app saves it as an editable
+  <strong>draft</strong> and you may tap <strong>"Normalize with AI"</strong>; or, on a song you've
+  already saved, you may tap <strong>"Reformat with AI"</strong> to tidy its formatting. In both cases
+  the app sends only <strong>that song's chord/lyric text</strong> to our backend (a serverless
+  function), which forwards it to <strong>Google's Gemini API</strong> and returns a tidy song sheet.</p>
   <ul>
     <li>This happens <strong>only on your explicit tap</strong> — never automatically, and never
       during normal use (capture, search, viewing, editing, or transposing).</li>
@@ -77,9 +95,37 @@
       subject to Google's applicable terms and privacy policy.</li>
   </ul>
 
-  <h3>3. Abuse-prevention rate limit</h3>
-  <p>Because the AI feature has no login, we apply a simple per-source rate limit to prevent abuse
-  and control cost. When you use "Normalize with AI", our backend records, for that request only:</p>
+  <h3>4. Optional "Suggest similar songs"</h3>
+  <p>Only when <strong>you tap</strong> "Suggest similar songs", the app sends the
+  <strong>titles, artists, and categories</strong> of a few of your favorite songs to our backend,
+  which forwards them to <strong>Google's Gemini API</strong> and returns a short list of suggested
+  song titles with a one-line reason each.</p>
+  <ul>
+    <li><strong>No lyrics or chords are ever sent for this feature</strong> &mdash; titles, artists,
+      and categories only.</li>
+    <li>Same policy as above: the submitted text is processed <strong>transiently</strong>, we do
+      <strong>not</strong> store it or the returned suggestions on our servers, and we do
+      <strong>not</strong> write any of it to our logs (we log only technical measures such as item
+      counts, byte sizes, and token counts).</li>
+    <li>Tapping a suggestion just runs a normal web search for that song's chords; you see real web
+      results before anything is imported.</li>
+    <li>The text is processed by Google as our service provider, subject to Google's applicable terms
+      and privacy policy.</li>
+  </ul>
+
+  <h3>5. Play-along video (YouTube)</h3>
+  <p>If you attach a <strong>YouTube video</strong> to a song, the play-along dock loads that video
+  from YouTube inside the app, and searching for one loads YouTube's mobile search page. That content
+  comes from <strong>Google/YouTube directly</strong>, and Google receives it like any normal YouTube
+  view &mdash; including your device's IP address, and Google's own cookies and terms. This is the one
+  part of a song sheet that is <strong>not</strong> offline: the chords and lyrics always render
+  offline, the video never does. PokyChords stores only the 11-character video id with the song, on
+  your device.</p>
+
+  <h3>6. Abuse-prevention rate limit</h3>
+  <p>Because the AI features have no login, we apply a simple per-source rate limit to prevent abuse
+  and control cost. When you use "Normalize with AI", "Reformat with AI", or "Suggest similar songs",
+  our backend records, for that request only:</p>
   <ul>
     <li>a <strong>salted, one-way hash of your IP address</strong> (not your IP address itself, and
       not reversible to it in normal use),</li>
@@ -120,13 +166,18 @@
 
   <h2>Children's privacy</h2>
   <p>PokyChords is not directed to children under 13 (or the equivalent minimum age in your region)
-  and does not knowingly collect personal information from them.</p>
+  and does not knowingly collect personal information from them. Because the in-app
+  <strong>Find</strong> browser can reach any website, the app is rated for older users on the App
+  Store and is not suitable for young children.</p>
 
   <h2>Your choices</h2>
   <ul>
-    <li>Everything except importing works offline; you can use the app without ever triggering a
-      network request.</li>
-    <li>You control whether "Normalize with AI" is ever used — it requires your tap.</li>
+    <li>Everything except importing, Find, the AI actions, and video playback works offline; you can
+      use the app without ever triggering a network request.</li>
+    <li>You control whether "Normalize with AI", "Reformat with AI", and "Suggest similar songs" are
+      ever used &mdash; each requires your tap.</li>
+    <li>Attaching a YouTube video to a song is optional; a song with no video attached never contacts
+      YouTube.</li>
     <li>You can delete any song in the app, and uninstalling removes all on-device data. Because we
       hold no account and no copy of your library, there is no server-side account to delete.</li>
   </ul>
