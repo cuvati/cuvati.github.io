@@ -67,8 +67,10 @@
   creates a recording; it does so only when you tap it, and it uses the camera and the microphone
   while it is running. The clip is written to a temporary folder on your device and handed straight
   to the iOS share sheet, so that you can save or send it yourself. The app then deletes its own
-  copy &mdash; whether you shared the clip or dismissed the sheet. PokyChords keeps no library of
-  recordings, and no recording is ever uploaded to us or to anyone else.</p>
+  copy &mdash; whether you shared the clip or dismissed the sheet. If something interrupts that
+  (the app is closed while the share sheet is still open, for example), the leftover file is deleted
+  the next time you open Stage mode. PokyChords keeps no library of recordings, and no recording is
+  ever uploaded to us or to anyone else.</p>
   <p>Recordings are not part of your songbook: a recording is never attached to a song and never
   included in the backup file.</p>
 
@@ -177,8 +179,8 @@
     <li><strong>On-device songs:</strong> kept until you delete them or uninstall the app.</li>
     <li><strong>AI-submitted text:</strong> not retained by us after the request is processed.</li>
     <li><strong>Stage recordings:</strong> not retained by the app at all &mdash; its copy is
-      deleted as soon as the share sheet closes. A clip you chose to save lives wherever you
-      saved it.</li>
+      deleted as soon as sharing finishes, and any leftover is removed the next time you open Stage
+      mode. A clip you chose to save lives wherever you saved it.</li>
     <li><strong>Rate-limit records:</strong> operational metadata only (hashed source + counters),
       retained briefly for the rate-limiting window and periodically cleaned up.</li>
   </ul>
